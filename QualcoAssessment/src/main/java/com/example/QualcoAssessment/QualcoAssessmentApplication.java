@@ -10,4 +10,5 @@ public class QualcoAssessmentApplication {
 		SpringApplication.run(QualcoAssessmentApplication.class, args);
 	}
 
+
 }
