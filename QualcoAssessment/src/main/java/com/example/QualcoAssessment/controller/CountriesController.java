@@ -7,8 +7,6 @@ import com.example.QualcoAssessment.model.dtos.CountryLanguageDTO;
 import com.example.QualcoAssessment.model.dtos.CountryStatsDTO;
 import com.example.QualcoAssessment.model.dtos.CountryStatsRecordDTO;
 import com.example.QualcoAssessment.services.CountriesService;
-import jakarta.websocket.server.PathParam;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
