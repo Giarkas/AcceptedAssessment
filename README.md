@@ -1,24 +1,53 @@
-This Project contains the backend of the assessment.
+This Project contains the assessment.
 
-It contains JPA Entities for each table of the schema, four Repositories (for the countries, the regions, the country stats and country languages), a controller and a service to prepare the responses of the controller
+After the deployment of the compose.yml file through docker, connect to the Postgres Db and run the tables.sql (located at the resourses of OrderManagement)
+Next, connect to MongoDb database and at the admin database create a collection with the name "orders"
 
-The controller implements the following REST GET APIs:
+After the deployment of both microservices you can call the following APIs
 
-Task1 a
-<host>:<port>/getCountries
+Get Order
+Type: GET
+url: http://localhost:8080/orders/{id}
+parameter: id= the id of the order
 
-Task1 b
-<host>:<port>/getCountryLanguages/{country_id}
+Place Order
+Type: POST
+url: http://localhost:8090/orders
+parameter: (application/json)
 
-Task2
-<host>:<port>/getCountriesRecords
+{
+  "customerName": "XXXXXXXX",
+  "orderDate": "YYYY-MM-ddTHH:mm:ssZ",
+  "orderLines": [
+      {
+      "productId": XXXX,
+      "quantity": XXX,
+      "price": XXX.XX
+      },
+      ....
+	]
+}
 
-Task3
-<host>:<port>/getCountriesStats?continent={continent_name}&region={region_name}&country={country}&fromYear={fromYear}&toYear={toYear}&orderColumn={order_column}&order={order}(
-continent: (not required) If this parameter is null then no filter for the Continent is applied
-region: (not required)  If this parameter is null then no filter for the Region is applied
-country: (not required) If this parameter is null then no filter for the Country is applied
-fromYear: (not required)(default value 0) If this parameter is null then there is no start date as a filter
-toYear: (not required)(default value 9999) If this parameter is null then there is no end date as a filter
-orderColumn: (not required)(default value CONTINENT) this parameter takes as value one of the following (CONTINENT, REGION, CONTINENT) and desides for which column the ordering is performed
-order: (not required)(default value ASCENDING) this parameter takes as value one of the following (ASCENDING, DESCENDING) and desides the ordering
+Update Order
+Type: PUT
+url: http://localhost:8090/orders/{id}
+parameters: id= the id of the order
+(application/json)
+
+{
+  "customerName": "XXXXXXXX",
+  "orderDate": "YYYY-MM-ddTHH:mm:ssZ",
+  "orderLines": [
+      {
+      "productId": XXXX,
+      "quantity": XXX,
+      "price": XXX.XX
+      },
+      ....
+	]
+}
+
+Delete Order
+Type: DELETE
+url: http://localhost:8080/orders/{id}
+parameter: id= the id of the order
