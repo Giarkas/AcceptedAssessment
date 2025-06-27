@@ -62,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void placeOrder(OrderDTO orderDTO) {
+    public long placeOrder(OrderDTO orderDTO) {
 
         validationService.validateOrder(orderDTO);
 
@@ -72,6 +72,7 @@ public class OrderServiceImpl implements OrderService {
 
         createOrderLines(orders, orderDTO);
 
+        return orders.getOrderId();
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 public interface OrderService {
     OrderDTO getOrderById(long orderId);
 
-    void placeOrder(OrderDTO orderDTO);
+    long placeOrder(OrderDTO orderDTO);
 
     void deleteOrder(long orderId);
 

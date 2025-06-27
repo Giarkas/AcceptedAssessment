@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/orders")
 public class OrderController {
 
     private static final Logger log = LoggerFactory.getLogger(OrderController.class);
@@ -32,11 +31,13 @@ public class OrderController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/orders", consumes = "application/json")
-    public ResponseEntity<OrderDTO> placeOrder(@RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<Long> placeOrder(@RequestBody OrderDTO orderDTO) {
 
-        orderService.placeOrder(orderDTO);
+        long id = orderService.placeOrder(orderDTO);
 
-        return new ResponseEntity<>(orderDTO, HttpStatus.CREATED);
+        log.info("Order Placed {}", orderDTO);
+
+        return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/orders/{id}")
@@ -48,8 +49,8 @@ public class OrderController {
 
     @RequestMapping(method = RequestMethod.PUT, path = "/orders/{id}")
     public ResponseEntity<OrderDTO> putOrder(@PathVariable long id, @RequestBody OrderDTO orderDTO) {
-        log.info("Update order by id {}", id);
         orderService.updateOrder(id, orderDTO);
+        log.info("Order with id {}, updated with {}", id, orderDTO);
         return new ResponseEntity<>(orderDTO, HttpStatus.OK);
     }
 }

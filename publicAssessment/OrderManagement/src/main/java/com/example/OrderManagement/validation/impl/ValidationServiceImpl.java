@@ -46,7 +46,7 @@ public class ValidationServiceImpl implements ValidationService {
                 customerName.contains("7") || customerName.contains("8") || customerName.contains("9") ||
                 customerName.contains("0"))
             throw new InvalidCustomerNameException("Customer name cannot contain numbers");
-        if (customerName.contains(" ") || customerName.contains("\t") || customerName.contains("\n") ||
+        if (customerName.contains("\t") || customerName.contains("\n") ||
         customerName.contains("\r") || customerName.contains("\'") || customerName.contains("\"") ||
         customerName.contains("<") || customerName.contains(">") || customerName.contains("!") ||
         customerName.contains("@") || customerName.contains("#") || customerName.contains("$") ||
