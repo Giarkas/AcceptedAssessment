@@ -1,0 +1,25 @@
+
+services:
+  postgres:
+    image: postgres:17.5
+    environment:
+      POSTGRES_USER: accepted
+      POSTGRES_PASSWORD: accepted
+      POSTGRES_DB: accepted_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  AcceptedAssessment:
+    image: assessment/assessment-accepted-docker:v1
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/accepted_db
+      SPRING_DATASOURCE_USERNAME: accepted
+      SPRING_DATASOURCE_PASSWORD: accepted
+    depends_on:
+      - postgres
+volumes:
+  postgres_data:
