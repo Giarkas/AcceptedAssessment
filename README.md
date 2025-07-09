@@ -1,53 +1,20 @@
 This Project contains the assessment.
 
-After the deployment of the compose.yml file through docker, connect to the Postgres Db and run the tables.sql (located at the resourses of OrderManagement)
-Next, connect to MongoDb database and at the admin database create a collection with the name "orders"
+You will find the Dockerfile to create the image of the project with the following command
 
-After the deployment of both microservices you can call the following APIs
+docker build -t assessment/assessment-accepted-docker:v1 .
 
-Get Order
-Type: GET
-url: http://localhost:8080/orders/{id}
-parameter: id= the id of the order
+After the build please run the docker compose file, located at the folder of the project with the following comand
 
-Place Order
-Type: POST
-url: http://localhost:8090/orders
-parameter: (application/json)
+docker-compose up -d
 
-{
-  "customerName": "XXXXXXXX",
-  "orderDate": "YYYY-MM-ddTHH:mm:ssZ",
-  "orderLines": [
-      {
-      "productId": XXXX,
-      "quantity": XXX,
-      "price": XXX.XX
-      },
-      ....
-	]
-}
+This compose will set up a postgres db 
 
-Update Order
-Type: PUT
-url: http://localhost:8090/orders/{id}
-parameters: id= the id of the order
-(application/json)
+USER: accepted
+PASSWORD: accepted
+DB: accepted_db
+URL: jdbc:localhost://postgres:5432/accepted_db
 
-{
-  "customerName": "XXXXXXXX",
-  "orderDate": "YYYY-MM-ddTHH:mm:ssZ",
-  "orderLines": [
-      {
-      "productId": XXXX,
-      "quantity": XXX,
-      "price": XXX.XX
-      },
-      ....
-	]
-}
+Upon the project's startup the tables will be created throough liquibase.
 
-Delete Order
-Type: DELETE
-url: http://localhost:8080/orders/{id}
-parameter: id= the id of the order
+The swagger uri, after deployment, is located at http://localhost:8080/swagger-ui.html
